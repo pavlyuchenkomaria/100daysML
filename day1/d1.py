@@ -4,12 +4,6 @@ from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import Imputer, StandardScaler
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
-a = 5
-b = a
-
-def sum(a, b):
-    return a + b
-
 class Durasha:
     def __init__(self, age=0, name="Masha"):
         # self. это обращение к коробочке с данными (текущему объекту,
