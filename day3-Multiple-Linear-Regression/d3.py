@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
+from sklearn.cross_validation import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 if __name__ == '__main__':
     # pd.read_csv - мы вызываем функцию, которая берет наши данные
@@ -15,5 +17,18 @@ if __name__ == '__main__':
 
     label_encoder = LabelEncoder()
     X[:, 3] = label_encoder.fit_transform(X[:, 3])
-    print(X)
+    one_hot_encoder = OneHotEncoder(categorical_features=[3])
+    X = one_hot_encoder.fit_transform(X).toarray()
 
+    X = X[:, 1:]
+
+    X_train, X_test, Y_train, Y_test =\
+        train_test_split(X, Y, test_size=0.2, random_state=0)
+
+    linear_regression = LinearRegression()
+    linear_regression = linear_regression.fit(X_train, Y_train)
+
+    Y_pred = linear_regression.predict(X_test)
+
+    print(Y_test)
+    print(Y_test - Y_pred)
